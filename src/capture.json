@@ -1,0 +1,104 @@
+{
+  "statusCode": 201,
+  "headers": {
+    "cache-control": "max-age=0, no-cache, no-store, must-revalidate",
+    "content-length": "1449",
+    "content-type": "application/json",
+    "date": "Mon, 19 Apr 2021 13:30:02 GMT",
+    "paypal-debug-id": "aedd92f1c809e",
+    "connection": "close"
+  },
+  "result": {
+    "id": "8X856429L7251674Y",
+    "status": "COMPLETED",
+    "purchase_units": [
+      {
+        "reference_id": "PUHF",
+        "shipping": {
+          "name": {
+            "full_name": "John Doe"
+          },
+          "address": {
+            "address_line_1": "2211 North Street",
+            "admin_area_2": "San Jose",
+            "admin_area_1": "CA",
+            "postal_code": "95123",
+            "country_code": "US"
+          }
+        },
+        "payments": {
+          "captures": [
+            {
+              "id": "94R04983NJ155994E",
+              "status": "COMPLETED",
+              "amount": {
+                "currency_code": "USD",
+                "value": "220.00"
+              },
+              "final_capture": true,
+              "seller_protection": {
+                "status": "ELIGIBLE",
+                "dispute_categories": [
+                  "ITEM_NOT_RECEIVED",
+                  "UNAUTHORIZED_TRANSACTION"
+                ]
+              },
+              "seller_receivable_breakdown": {
+                "gross_amount": {
+                  "currency_code": "USD",
+                  "value": "220.00"
+                },
+                "paypal_fee": {
+                  "currency_code": "USD",
+                  "value": "6.68"
+                },
+                "net_amount": {
+                  "currency_code": "USD",
+                  "value": "213.32"
+                }
+              },
+              "custom_id": "12356699",
+              "links": [
+                {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/captures/94R04983NJ155994E",
+                  "rel": "self",
+                  "method": "GET"
+                },
+                {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/captures/94R04983NJ155994E/refund",
+                  "rel": "refund",
+                  "method": "POST"
+                },
+                {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/8X856429L7251674Y",
+                  "rel": "up",
+                  "method": "GET"
+                }
+              ],
+              "create_time": "2021-04-19T13:30:01Z",
+              "update_time": "2021-04-19T13:30:01Z"
+            }
+          ]
+        }
+      }
+    ],
+    "payer": {
+      "name": {
+        "given_name": "John",
+        "surname": "Doe"
+      },
+      "email_address": "sb-sbewg5908363@personal.example.com",
+      "payer_id": "MSYSQVWX4BJGC",
+      "address": {
+        "country_code": "US"
+      }
+    },
+    "links": [
+      {
+        "href": "https://api.sandbox.paypal.com/v2/checkout/orders/8X856429L7251674Y",
+        "rel": "self",
+        "method": "GET"
+      }
+    ]
+  }
+}

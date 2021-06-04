@@ -7,14 +7,13 @@ import {
   CLIENT_ADMIN_ORIGIN,
   CLIENT_CUSTOMER_ORIGIN,
   IS_PRODUCTION,
-  IS_STAGING,
+  // IS_STAGING,
 } from "../config";
 import { tokenValidator } from "../middlewares/auth";
 
 const whitelist: (string | undefined)[] = [
   CLIENT_CUSTOMER_ORIGIN,
   CLIENT_ADMIN_ORIGIN,
-  "http://localhost:3001",
 ];
 
 export const registerMiddlewaresBeforeRoute = (app: Express) => {
@@ -22,19 +21,21 @@ export const registerMiddlewaresBeforeRoute = (app: Express) => {
     cors({
       credentials: true,
       origin: function (origin, callback) {
-        if (whitelist.includes(origin) || !origin) {
+        if (IS_PRODUCTION && origin?.includes("stcker.com")) {
           callback(null, true);
-        } else {
-          callback(null, false);
+          return;
         }
+
+        if (!IS_PRODUCTION && whitelist.includes(origin)) {
+          callback(null, true);
+          return;
+        }
+
+        callback(null, false);
       },
     })
   );
-  app.use(
-    helmet({
-      contentSecurityPolicy: IS_STAGING || IS_PRODUCTION ? undefined : false,
-    })
-  );
+  app.use(helmet());
   app.use(express.json());
   app.use(cookieParser());
   app.use(tokenValidator);

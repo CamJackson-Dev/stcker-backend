@@ -9,13 +9,12 @@ import {
   registerMiddlewaresAfterRoute,
   registerMiddlewaresBeforeRoute,
 } from "./app/middlewares";
-import { IS_TESTING } from "./config";
+import { IS_PRODUCTION, IS_TESTING } from "./config";
 import { generateRandomPort } from "./utils/helpers";
-
-const app = express();
 
 export const bootstrap = async () => {
   try {
+    const app = express();
     let port = process.env.PORT || 5000;
 
     if (IS_TESTING) {
@@ -32,8 +31,9 @@ export const bootstrap = async () => {
         validate: false,
         dateScalarMode: "timestamp",
       }),
-      schemaDirectives: {},
       context: ({ req, res }) => ({ req, res }),
+      playground: IS_PRODUCTION ? false : undefined,
+      introspection: IS_PRODUCTION ? false : undefined,
     });
 
     server.applyMiddleware({ app, cors: false });

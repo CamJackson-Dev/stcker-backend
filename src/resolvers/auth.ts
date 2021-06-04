@@ -47,7 +47,7 @@ class RegisterArgs extends LoginArgs {
 @Resolver()
 export class AuthResolver {
   @Mutation(() => UserType)
-  @UseMiddleware(RateLimit(20))
+  @UseMiddleware(RateLimit(100))
   async login(@Args() args: LoginArgs, @Ctx() { res }: ExpressContext) {
     const errors = getValidationErrors(args, loginSchema);
     if (errors) throw new Error(JSON.stringify(errors));

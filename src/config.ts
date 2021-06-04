@@ -34,6 +34,7 @@ export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY!;
 export const SENDER_EMAIL_ADDRESS = process.env.SENDER_EMAIL_ADDRESS!;
 
 const COOKIE_OPTIONS = {
+  domain: IS_PRODUCTION ? "stcker.com" : undefined,
   httpOnly: true,
   secure: IS_PRODUCTION || IS_STAGING,
   sameSite: IS_PRODUCTION

@@ -25,6 +25,12 @@ export const bootstrap = async () => {
     await connectToDatabase();
     registerMiddlewaresBeforeRoute(app);
 
+    app.get("/", (_, res) => {
+      res.status(404).send({
+        message: "No resource found",
+      });
+    });
+
     const server = new ApolloServer({
       schema: await buildSchema({
         resolvers: [__dirname + "/resolvers/*.{ts,js}"],
@@ -35,7 +41,6 @@ export const bootstrap = async () => {
       playground: IS_PRODUCTION ? false : undefined,
       introspection: IS_PRODUCTION ? false : undefined,
     });
-
     server.applyMiddleware({ app, cors: false });
 
     registerMiddlewaresAfterRoute(app);

@@ -11,28 +11,13 @@ import {
 } from "../config";
 import { tokenValidator } from "../middlewares/auth";
 
-const whitelist: (string | undefined)[] = [
-  CLIENT_CUSTOMER_ORIGIN,
-  CLIENT_ADMIN_ORIGIN,
-];
+const whitelist: string[] = [CLIENT_CUSTOMER_ORIGIN, CLIENT_ADMIN_ORIGIN];
 
 export const registerMiddlewaresBeforeRoute = (app: Express) => {
   app.use(
     cors({
       credentials: true,
-      origin: function (origin, callback) {
-        if (IS_PRODUCTION && origin?.includes("stcker.com")) {
-          callback(null, true);
-          return;
-        }
-
-        if (!IS_PRODUCTION && whitelist.includes(origin)) {
-          callback(null, true);
-          return;
-        }
-
-        callback(null, false);
-      },
+      origin: IS_PRODUCTION ? /stcker\.com$/ : whitelist,
     })
   );
   app.use(helmet());

@@ -34,14 +34,10 @@ export const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY!;
 export const SENDER_EMAIL_ADDRESS = process.env.SENDER_EMAIL_ADDRESS!;
 
 const COOKIE_OPTIONS = {
-  domain: IS_PRODUCTION ? "stcker.com" : undefined,
+  domain: IS_PRODUCTION ? ".stcker.com" : undefined,
   httpOnly: true,
   secure: IS_PRODUCTION || IS_STAGING,
-  sameSite: IS_PRODUCTION
-    ? ("lax" as const)
-    : IS_STAGING
-    ? ("none" as const)
-    : undefined,
+  sameSite: IS_PRODUCTION || IS_STAGING ? ("none" as const) : undefined,
 };
 export const ACCESS_COOKIE_OPTIONS = {
   ...COOKIE_OPTIONS,

@@ -3,21 +3,20 @@ import express, { Express, Request, Response } from "express";
 import helmet from "helmet";
 import cors from "cors";
 
-import {
-  CLIENT_ADMIN_ORIGIN,
-  CLIENT_CUSTOMER_ORIGIN,
-  IS_PRODUCTION,
-  // IS_STAGING,
-} from "../config";
+import { CLIENT_ADMIN_ORIGIN, CLIENT_CUSTOMER_ORIGIN } from "../config";
 import { tokenValidator } from "../middlewares/auth";
 
-const whitelist: string[] = [CLIENT_CUSTOMER_ORIGIN, CLIENT_ADMIN_ORIGIN];
+const whitelist: string[] = [
+  CLIENT_CUSTOMER_ORIGIN,
+  CLIENT_ADMIN_ORIGIN,
+  "https://www.stcker.com",
+];
 
 export const registerMiddlewaresBeforeRoute = (app: Express) => {
   app.use(
     cors({
       credentials: true,
-      origin: IS_PRODUCTION ? /stcker\.com$/ : whitelist,
+      origin: whitelist,
     })
   );
   app.use(helmet());

@@ -107,6 +107,8 @@ export class OrderResolver {
 
       return order.result.id;
     } catch (ex) {
+      console.log(ex);
+
       const error = parseValueIfJSONString(ex.message);
       if (typeof error === "string") throw new Error(error);
 

@@ -90,7 +90,7 @@ export class OrderResolver {
   @UseMiddleware(IsAuthorized)
   @Mutation(() => String)
   async createOrder(@Ctx() { req }: ExpressContext) {
-    console.log(IS_PRODUCTION);
+    console.log(IS_PRODUCTION, process.env.NODE_ENV);
     const user = await User.findById(req.user?._id).populate("carts");
     if (!user) throw new Error("User not found");
 

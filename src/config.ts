@@ -17,9 +17,10 @@ export const COMPANY_LOGO_URL =
 export const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 export const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 
-export const IS_PRODUCTION = process.env.NODE_ENV === "production";
-export const IS_STAGING = process.env.NODE_ENV === "staging";
-export const IS_TESTING = process.env.NODE_ENV === "test";
+const environment = process.env.NODE_ENV?.trim();
+export const IS_PRODUCTION = environment === "production";
+export const IS_STAGING = environment === "staging";
+export const IS_TESTING = environment === "test";
 
 export const MONGO_URL = process.env.MONGO_URL!;
 export const MILLISECONDS_IN_ONE_HOUR = 1000 * 60 * 60;

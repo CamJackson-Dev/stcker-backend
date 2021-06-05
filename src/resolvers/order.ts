@@ -2,6 +2,7 @@
 import paypal from "@paypal/checkout-server-sdk";
 import { ExpressContext } from "apollo-server-express";
 import { QueryOptions, Types } from "mongoose";
+import { IS_PRODUCTION } from "src/config";
 import {
   Arg,
   Ctx,
@@ -107,6 +108,7 @@ export class OrderResolver {
 
       return order.result.id;
     } catch (ex) {
+      console.log(IS_PRODUCTION);
       console.log(ex);
 
       const error = parseValueIfJSONString(ex.message);

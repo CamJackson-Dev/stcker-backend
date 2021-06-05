@@ -1,20 +1,18 @@
 // @ts-ignore
 import paypal from "@paypal/checkout-server-sdk";
 import {
-  // IS_PRODUCTION,
+  IS_PRODUCTION,
   PAYPAL_CLIENT_ID,
   PAYPAL_CLIENT_SECRET,
 } from "../../config";
 
 const createEnvironment = () => {
-  return new paypal.core.LiveEnvironment(
-    PAYPAL_CLIENT_ID,
-    PAYPAL_CLIENT_SECRET
-  );
-  // : new paypal.core.SandboxEnvironment(
-  //     PAYPAL_CLIENT_ID,
-  //     PAYPAL_CLIENT_SECRET
-  //   );
+  return IS_PRODUCTION
+    ? new paypal.core.LiveEnvironment(PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET)
+    : new paypal.core.SandboxEnvironment(
+        PAYPAL_CLIENT_ID,
+        PAYPAL_CLIENT_SECRET
+      );
 };
 
 export const createPaypalClient = () => {

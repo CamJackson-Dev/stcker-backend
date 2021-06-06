@@ -15,7 +15,6 @@ export interface IOrder extends Document {
   items: OrderItem[];
   orderId: string;
   orderStatus: string;
-  payPalFee: number;
   paymentStatus: string;
   shippingDetails: ShippingDetails;
   user: string;
@@ -49,10 +48,6 @@ export const orderSchema = new Schema(
       required: true,
     },
     grossAmount: {
-      type: Number,
-      required: true,
-    },
-    payPalFee: {
       type: Number,
       required: true,
     },

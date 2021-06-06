@@ -63,9 +63,6 @@ export class OrderType {
   orderStatus: string; // PENDING -> PLACED -> SHIPPING -> DELIVERED
 
   @Field()
-  payPalFee: number;
-
-  @Field()
   paymentStatus: string; // CREATED | APPROVED | VOIDED | COMPLETED | PAYER_ACTION_REQUIRED | SAVED
 
   @Field(() => AddressType)

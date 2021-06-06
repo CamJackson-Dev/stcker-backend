@@ -186,12 +186,7 @@ export function generateOrderDocumentFields(options: {
       country: shipping.address.country_code,
       email: payer.email_address,
     },
-    grossAmount: parseFloat(
-      payment.captures[0].seller_receivable_breakdown.gross_amount.value
-    ),
-    payPalFee: parseFloat(
-      payment.captures[0].seller_receivable_breakdown.paypal_fee.value
-    ),
+    grossAmount: parseFloat(payment.captures[0]?.amount?.value || 0),
   };
 }
 
